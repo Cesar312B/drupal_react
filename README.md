@@ -41,38 +41,7 @@ Podemos instalar dentro de nuestro proyecto axios con el comando npm install axi
 18.	import React, { useEffect, useState } from 'react';
 19.	import axios from 'axios';
 20.	
-21.	const BlogPosts = () => {
-22.	  const [posts, setPosts] = useState([]);
-23.	
-24.	  useEffect(() => {
-25.	    const fetchPosts = async () => {
-26.	      try {
-27.	        const response = await axios.get('http://localhost/drupal/node/{1}');
-28.	        setPosts(response.data); // Cambiar de response.data.data a response.data
-29.	      } catch (error) {
-30.	        console.error(error);
-31.	      }
-32.	    };
-33.	
-34.	    fetchPosts();
-35.	  }, []);
-36.	
-37.	  return (
-38.	    <div>
-39.	      <h3>Blogs</h3>
-40.	      <ul>
-41.	        {posts.map((post) => (
-42.	          <li key={post.id}>
-43.	            <h3>{post.attributes.title}</h3>
-44.	          </li>
-45.	        ))}
-46.	      </ul>
-47.	    </div>
-48.	  );
-49.	};
-50.	
-51.	export default BlogPosts;
-
+21.	
 •	Analiza y procesa los datos recibidos en formato JSON para mostrarlos en tu aplicación React.js.
 Con estos pasos, tendrás configurado un servicio API REST en Drupal y podrás consumirlo desde tu aplicación React.js para mostrar el contenido del blog. Asegúrate de ajustar la configuración y el código según tus necesidades específicas.
 
