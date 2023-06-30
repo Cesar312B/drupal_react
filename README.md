@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+Crear REST API con Drupal y REACTJS
+Para crear un servicio API REST desde Drupal y consumirlo utilizando React.js, puedes seguir los siguientes pasos:
+1.	Configurar Drupal:
+•	Crea un tipo de contenido personalizado para representar las entradas del blog. Asegúrate de agregar los campos necesarios, como título, cuerpo, fecha, autor, etc.
+2.	Habilitar el módulo de servicios web:
+•	En Drupal, ve a "Ampliar" en el menú de administración y busca el módulo "Web Services" o "RESTful Web Services" y habilitados junto con Serialización y REST UI.
+ 
+3.	Configurar el recurso REST:
+•	En el menú de administración de Drupal, ve a "Configuration" y busca la sección "Web Services" o "RESTful Web Services".
+ 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+•	Haz clic en "Add" o "Create Resource" para crear un nuevo recurso REST.
+ 
+•	Configura la ruta del recurso y selecciona el tipo de contenido personalizado que creaste para representar las entradas del blog.
+•	Define los métodos HTTP permitidos (GET, POST, PUT, DELETE) y los formatos de respuesta admitidos (JSON, XML, etc.).
+ 
+•	Guarda la configuración.
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+4.	Desarrollar la aplicación React.js:
+•	Configura un nuevo proyecto React.js utilizando herramientas como Create React App o Next.js.
+•	En tu aplicación React.js, puedes usar bibliotecas como axios o fetch para realizar solicitudes HTTP al servicio API REST de Drupal.
+Podemos instalar dentro de nuestro proyecto axios con el comando npm install axios
+5.	{
+6.	  "name": "drupal",
+7.	  "version": "0.1.0",
+8.	  "private": true,
+9.	  "dependencies": {
+10.	    "@testing-library/jest-dom": "^5.16.5",
+11.	    "@testing-library/react": "^13.4.0",
+12.	    "@testing-library/user-event": "^13.5.0",
+13.	    "axios": "^1.4.0",
+14.	    "react": "^18.2.0",
+15.	    "react-dom": "^18.2.0",
+16.	    "react-scripts": "5.0.1",
+17.	    "web-vitals": "^2.1.4"
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+•	Utiliza los métodos adecuados (GET, POST, PUT, DELETE) para obtener, crear, actualizar y eliminar las entradas del blog.
+18.	import React, { useEffect, useState } from 'react';
+19.	import axios from 'axios';
+20.	
+21.	const BlogPosts = () => {
+22.	  const [posts, setPosts] = useState([]);
+23.	
+24.	  useEffect(() => {
+25.	    const fetchPosts = async () => {
+26.	      try {
+27.	        const response = await axios.get('http://localhost/drupal/node/{1}');
+28.	        setPosts(response.data); // Cambiar de response.data.data a response.data
+29.	      } catch (error) {
+30.	        console.error(error);
+31.	      }
+32.	    };
+33.	
+34.	    fetchPosts();
+35.	  }, []);
+36.	
+37.	  return (
+38.	    <div>
+39.	      <h3>Blogs</h3>
+40.	      <ul>
+41.	        {posts.map((post) => (
+42.	          <li key={post.id}>
+43.	            <h3>{post.attributes.title}</h3>
+44.	          </li>
+45.	        ))}
+46.	      </ul>
+47.	    </div>
+48.	  );
+49.	};
+50.	
+51.	export default BlogPosts;
 
-### `npm test`
+•	Analiza y procesa los datos recibidos en formato JSON para mostrarlos en tu aplicación React.js.
+Con estos pasos, tendrás configurado un servicio API REST en Drupal y podrás consumirlo desde tu aplicación React.js para mostrar el contenido del blog. Asegúrate de ajustar la configuración y el código según tus necesidades específicas.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
