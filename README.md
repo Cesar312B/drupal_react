@@ -23,19 +23,24 @@ Para crear un servicio API REST desde Drupal y consumirlo utilizando React.js, p
 •	Configura un nuevo proyecto React.js utilizando herramientas como Create React App o Next.js.
 •	En tu aplicación React.js, puedes usar bibliotecas como axios o fetch para realizar solicitudes HTTP al servicio API REST de Drupal.
 Podemos instalar dentro de nuestro proyecto axios con el comando npm install axios
-5.	{
-6.	  "name": "drupal",
-7.	  "version": "0.1.0",
-8.	  "private": true,
-9.	  "dependencies": {
-10.	    "@testing-library/jest-dom": "^5.16.5",
-11.	    "@testing-library/react": "^13.4.0",
-12.	    "@testing-library/user-event": "^13.5.0",
-13.	    "axios": "^1.4.0",
-14.	    "react": "^18.2.0",
-15.	    "react-dom": "^18.2.0",
-16.	    "react-scripts": "5.0.1",
-17.	    "web-vitals": "^2.1.4"
+
+Como libreria adicional para ver el body de los contenidos de drupal se debe instalar en el pryecto dompurify con
+npm install dompurify
+{
+  "name": "api",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.4.0",
+    "dompurify": "^3.0.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
 
 •	Utiliza los métodos adecuados (GET, POST, PUT, DELETE) para obtener, crear, actualizar y eliminar las entradas del blog.
 18.	import React, { useEffect, useState } from 'react';
