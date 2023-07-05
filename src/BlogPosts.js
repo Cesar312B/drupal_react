@@ -2,30 +2,35 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const BlogPosts = () => {
-  const [posts, setPosts] = useState([]);
+  const [content, setContent] = useState({});
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchContent = async () => {
       try {
-        const response = await axios.get('http://localhost/drupal/node/{1}');
-        setPosts(response.data); // Cambiar de response.data.data a response.data
+        const node = 1; // Reemplaza con el ID numérico del nodo que deseas obtener
+        const response = await axios.get(`http://localhost/drupal/node/${node}?_format=json`);
+        console.log(response.data); 
+        setContent(response.data);
       } catch (error) {
         console.error(error);
       }
     };
 
-    fetchPosts();
+    fetchContent();
   }, []);
 
   return (
     <div>
-      <h3>Blogs</h3>
+      <h2>Content List</h2>
       <ul>
-        {posts.map((post) => (
-          <li key={post.id}>
-            <h3>{post.attributes.title}</h3>
-          </li>
-        ))}
+        <li>
+          {content.title && (
+            <p>{content.title[0].value}</p>
+          )}
+          {content.body && (
+            <p>{content.body[0].processed}</p>
+          )}
+        </li>
       </ul>
     </div>
   );
